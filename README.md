@@ -1,32 +1,27 @@
-#LAMDA
+# LAMDA
 
-#Model Slicing
+## Model Slicing
 The input file is `input.json` and the output file is `output.json`.
+
 ```bash
 python ./NAR-predictor/dp2.py input.json output.json
-```bash
 
-LLM Fine-tuning：
-```bash
+LLM Fine-tuning
 git clone https://github.com/QwenLM/Qwen.git
 cd Qwen
-bash ./finetune/finetune_qlora_single_gpu.sh 
-```bash
+bash ./finetune/finetune_qlora_single_gpu.sh
 
 
-LLM Model Generation：
-```bash
+LLM Model Generation
 python generator.py
-```bash
 
-Model decoder：
-```bash
+
+Model decoder
 python decode_V2.py
-```bash
 
-Accuracy Testing Module：
-```bash
+
+Accuracy Testing Module
 python python ./Training_module/trainer.py
-```bash
+
 
 
