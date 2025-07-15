@@ -1,0 +1,93 @@
+2024-04-05 12:50:11,225-main.py:69-INFO-Loading args: 
+Namespace(all_latency_file='D:/NAR/NAR-Former-V2-main/NAR-Former-V2-main/dataset/unseen_structure/gt_stage.txt', batch_size=16, ckpt_save_freq=1000, data_root='D:/NAR/NAR-Former-V2-main/NAR-Former-V2-main/dataset/unseen_structure/data', dataset='nnlqp', embed_type='trans', epochs=50, feat_shuffle=False, ffn_ratio=4, glt_norm='LN', gpu=2, hidden_size=512, lambda_cons=0, lambda_sr=0, log='log/train.log', lr=0.001, model_dir='checkpoints/', multires_p=0, multires_x=0, n_attned_gnn=2, norm_sf=True, num_node_features=152, only_test=False, onnx_dir='D:/NAR/NAR-Former-V2-main/NAR-Former-V2-main/dataset/unseen_structure', optype='onehot', override_data=False, pretrain=None, print_freq=50, resume=None, test_freq=1, test_model_type=None, train_model_types=None, train_num=-1, train_test_stage=True, use_degree=True, warmup_rate=0.1)
+2024-04-05 12:50:11,225-main.py:76-INFO-Loading dataset:
+2024-04-05 12:50:11,556-main.py:274-INFO-Train data = 0, Test data = 0
+2024-04-05 12:53:35,296-main.py:69-INFO-Loading args: 
+Namespace(all_latency_file='D:/NAR/NAR-Former-V2-main/NAR-Former-V2-main/dataset/unseen_structure/gt_stage.txt', batch_size=16, ckpt_save_freq=1000, data_root='D:/NAR/NAR-Former-V2-main/NAR-Former-V2-main/dataset/unseen_structure/data', dataset='nnlqp', embed_type='trans', epochs=50, feat_shuffle=False, ffn_ratio=4, glt_norm='LN', gpu=2, hidden_size=512, lambda_cons=0, lambda_sr=0, log='log/train.log', lr=0.001, model_dir='checkpoints/', multires_p=0, multires_x=0, n_attned_gnn=2, norm_sf=True, num_node_features=152, only_test=False, onnx_dir='D:/NAR/NAR-Former-V2-main/NAR-Former-V2-main/dataset/unseen_structure', optype='onehot', override_data=False, pretrain=None, print_freq=50, resume=None, test_freq=1, test_model_type=None, train_model_types=None, train_num=-1, train_test_stage=True, use_degree=True, warmup_rate=0.1)
+2024-04-05 12:53:35,297-main.py:76-INFO-Loading dataset:
+2024-04-05 12:53:35,621-main.py:274-INFO-Train data = 0, Test data = 0
+2024-04-05 17:32:42,863-main.py:69-INFO-Loading args: 
+Namespace(all_latency_file='D:/NAR/NAR-Former-V2-main/NAR-Former-V2-main/dataset/unseen_structure/gt_stage.txt', batch_size=16, ckpt_save_freq=1000, data_root='D:/NAR/NAR-Former-V2-main/NAR-Former-V2-main/dataset/unseen_structure/data', dataset='nnlqp', embed_type='trans', epochs=50, feat_shuffle=False, ffn_ratio=4, glt_norm='LN', gpu=2, hidden_size=512, lambda_cons=0, lambda_sr=0, log='log/train.log', lr=0.001, model_dir='checkpoints/', multires_p=0, multires_x=0, n_attned_gnn=2, norm_sf=True, num_node_features=152, only_test=False, onnx_dir='D:/NAR/NAR-Former-V2-main/NAR-Former-V2-main/dataset/unseen_structure', optype='onehot', override_data=False, pretrain=None, print_freq=50, resume=None, test_freq=1, test_model_type=None, train_model_types=None, train_num=-1, train_test_stage=True, use_degree=True, warmup_rate=0.1)
+2024-04-05 17:32:42,863-main.py:76-INFO-Loading dataset:
+2024-04-05 17:32:44,943-main.py:274-INFO-Train data = 18000, Test data = 2000
+2024-04-05 17:32:58,689-main.py:69-INFO-Loading args: 
+Namespace(all_latency_file='D:/NAR/NAR-Former-V2-main/NAR-Former-V2-main/dataset/unseen_structure/gt_stage.txt', batch_size=16, ckpt_save_freq=1000, data_root='D:/NAR/NAR-Former-V2-main/NAR-Former-V2-main/dataset/unseen_structure/data', dataset='nnlqp', embed_type='trans', epochs=50, feat_shuffle=False, ffn_ratio=4, glt_norm='LN', gpu=0, hidden_size=512, lambda_cons=0, lambda_sr=0, log='log/train.log', lr=0.001, model_dir='checkpoints/', multires_p=0, multires_x=0, n_attned_gnn=2, norm_sf=True, num_node_features=152, only_test=False, onnx_dir='D:/NAR/NAR-Former-V2-main/NAR-Former-V2-main/dataset/unseen_structure', optype='onehot', override_data=False, pretrain=None, print_freq=50, resume=None, test_freq=1, test_model_type=None, train_model_types=None, train_num=-1, train_test_stage=True, use_degree=True, warmup_rate=0.1)
+2024-04-05 17:32:58,689-main.py:76-INFO-Loading dataset:
+2024-04-05 17:33:00,777-main.py:274-INFO-Train data = 18000, Test data = 2000
+2024-04-05 17:33:01,526-main.py:101-INFO-Init Model: Net(
+  (gnn_layers): ModuleList(
+    (0): GNN_LinearAttn(
+      (lin_l): Linear(152, 512, bias=True)
+      (lin_r): Linear(152, 512, bias=False)
+      (lin_d): Linear(1, 152, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(152, 152, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (1): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+  )
+  (gnn_drops): ModuleList(
+    (0): Dropout(p=0.05, inplace=False)
+    (1): Dropout(p=0.05, inplace=False)
+  )
+  (gnn_relus): ModuleList(
+    (0): ReLU()
+    (1): ReLU()
+  )
+  (FFN_layers): ModuleList(
+    (0): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (1): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+  )
+  (layer_scale): ParameterList(
+      (0): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (1): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+  )
+  (norm_sf_linear): Linear(in_features=40, out_features=512, bias=True)
+  (norm_sf_drop): Dropout(p=0.05, inplace=False)
+  (norm_sf_relu): ReLU()
+  (fc_1): Linear(in_features=1024, out_features=512, bias=True)
+  (fc_2): Linear(in_features=512, out_features=512, bias=True)
+  (fc_drop_1): Dropout(p=0.05, inplace=False)
+  (fc_drop_2): Dropout(p=0.05, inplace=False)
+  (fc_relu1): ReLU()
+  (fc_relu2): ReLU()
+  (predictor): Linear(in_features=512, out_features=1, bias=True)
+)
+2024-04-05 17:33:01,527-main.py:109-INFO-Loading model:

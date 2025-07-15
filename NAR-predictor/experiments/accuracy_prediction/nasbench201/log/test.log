@@ -1,0 +1,2803 @@
+2024-04-04 21:24:51,921-main.py:69-INFO-Loading args: 
+Namespace(all_latency_file=None, batch_size=1024, ckpt_save_freq=1000, data_root='D:/NAR/NAR-Former-V2-main/NAR-Former-V2-main/dataset/nasbench201/all.pt', dataset='nasbench201', embed_type='nerf', epochs=1000, feat_shuffle=False, ffn_ratio=4, glt_norm='LN', gpu=1, hidden_size=512, lambda_cons=0.5, lambda_sr=0.1, log='log/test.log', lr=0.0001, model_dir=None, multires_p=32, multires_x=32, n_attned_gnn=6, norm_sf=False, num_node_features=128, only_test=True, onnx_dir=None, optype='pe', override_data=False, pretrain='checkpoints/ckpt_best.pth', print_freq=50, resume=None, test_freq=1, test_model_type=None, train_model_types=None, train_num=781, train_test_stage=False, use_degree=True, warmup_rate=0.1)
+2024-04-04 21:24:51,921-main.py:76-INFO-Loading dataset:
+2024-04-04 21:24:53,087-main.py:197-INFO-Test data = 15625
+2024-04-04 21:25:10,452-main.py:69-INFO-Loading args: 
+Namespace(all_latency_file=None, batch_size=1024, ckpt_save_freq=1000, data_root='D:/NAR/NAR-Former-V2-main/NAR-Former-V2-main/dataset/nasbench201/all.pt', dataset='nasbench201', embed_type='nerf', epochs=1000, feat_shuffle=False, ffn_ratio=4, glt_norm='LN', gpu=0, hidden_size=512, lambda_cons=0.5, lambda_sr=0.1, log='log/test.log', lr=0.0001, model_dir=None, multires_p=32, multires_x=32, n_attned_gnn=6, norm_sf=False, num_node_features=128, only_test=True, onnx_dir=None, optype='pe', override_data=False, pretrain='checkpoints/ckpt_best.pth', print_freq=50, resume=None, test_freq=1, test_model_type=None, train_model_types=None, train_num=781, train_test_stage=False, use_degree=True, warmup_rate=0.1)
+2024-04-04 21:25:10,452-main.py:76-INFO-Loading dataset:
+2024-04-04 21:25:11,627-main.py:197-INFO-Test data = 15625
+2024-04-04 21:25:12,426-main.py:101-INFO-Init Model: Net(
+  (gnn_layers): ModuleList(
+    (0): GNN_LinearAttn(
+      (lin_l): Linear(128, 512, bias=True)
+      (lin_r): Linear(128, 512, bias=False)
+      (lin_d): Linear(1, 128, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(128, 128, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (1): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (2): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (3): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (4): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (5): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+  )
+  (gnn_drops): ModuleList(
+    (0): Dropout(p=0.05, inplace=False)
+    (1): Dropout(p=0.05, inplace=False)
+    (2): Dropout(p=0.05, inplace=False)
+    (3): Dropout(p=0.05, inplace=False)
+    (4): Dropout(p=0.05, inplace=False)
+    (5): Dropout(p=0.05, inplace=False)
+  )
+  (gnn_relus): ModuleList(
+    (0): ReLU()
+    (1): ReLU()
+    (2): ReLU()
+    (3): ReLU()
+    (4): ReLU()
+    (5): ReLU()
+  )
+  (FFN_layers): ModuleList(
+    (0): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (1): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (2): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (3): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (4): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (5): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+  )
+  (layer_scale): ParameterList(
+      (0): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (1): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (2): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (3): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (4): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (5): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+  )
+  (fusion_mlp): Sequential(
+    (0): Linear(in_features=3072, out_features=768, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=768, out_features=6, bias=True)
+    (3): Sigmoid()
+  )
+  (fc_1): Linear(in_features=512, out_features=512, bias=True)
+  (fc_2): Linear(in_features=512, out_features=512, bias=True)
+  (fc_drop_1): Dropout(p=0.05, inplace=False)
+  (fc_drop_2): Dropout(p=0.05, inplace=False)
+  (fc_relu1): ReLU()
+  (fc_relu2): ReLU()
+  (predictor): Linear(in_features=512, out_features=1, bias=True)
+)
+2024-04-04 21:25:12,427-main.py:109-INFO-Loading model:
+2024-04-04 21:25:12,429-main.py:287-INFO-Loading pretrain: checkpoints/ckpt_best.pth
+2024-04-04 21:26:37,614-main.py:69-INFO-Loading args: 
+Namespace(all_latency_file=None, batch_size=1024, ckpt_save_freq=1000, data_root='D:/NAR/NAR-Former-V2-main/NAR-Former-V2-main/dataset/nasbench201/all.pt', dataset='nasbench201', embed_type='nerf', epochs=1000, feat_shuffle=False, ffn_ratio=4, glt_norm='LN', gpu=0, hidden_size=512, lambda_cons=0.5, lambda_sr=0.1, log='log/test.log', lr=0.0001, model_dir=None, multires_p=32, multires_x=32, n_attned_gnn=6, norm_sf=False, num_node_features=128, only_test=True, onnx_dir=None, optype='pe', override_data=False, pretrain='checkpoints/ckpt_best.pth', print_freq=50, resume=None, test_freq=1, test_model_type=None, train_model_types=None, train_num=781, train_test_stage=False, use_degree=True, warmup_rate=0.1)
+2024-04-04 21:26:37,614-main.py:76-INFO-Loading dataset:
+2024-04-04 21:26:38,778-main.py:197-INFO-Test data = 15625
+2024-04-04 21:26:39,571-main.py:101-INFO-Init Model: Net(
+  (gnn_layers): ModuleList(
+    (0): GNN_LinearAttn(
+      (lin_l): Linear(128, 512, bias=True)
+      (lin_r): Linear(128, 512, bias=False)
+      (lin_d): Linear(1, 128, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(128, 128, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (1): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (2): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (3): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (4): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (5): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+  )
+  (gnn_drops): ModuleList(
+    (0): Dropout(p=0.05, inplace=False)
+    (1): Dropout(p=0.05, inplace=False)
+    (2): Dropout(p=0.05, inplace=False)
+    (3): Dropout(p=0.05, inplace=False)
+    (4): Dropout(p=0.05, inplace=False)
+    (5): Dropout(p=0.05, inplace=False)
+  )
+  (gnn_relus): ModuleList(
+    (0): ReLU()
+    (1): ReLU()
+    (2): ReLU()
+    (3): ReLU()
+    (4): ReLU()
+    (5): ReLU()
+  )
+  (FFN_layers): ModuleList(
+    (0): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (1): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (2): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (3): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (4): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (5): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+  )
+  (layer_scale): ParameterList(
+      (0): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (1): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (2): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (3): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (4): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (5): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+  )
+  (fusion_mlp): Sequential(
+    (0): Linear(in_features=3072, out_features=768, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=768, out_features=6, bias=True)
+    (3): Sigmoid()
+  )
+  (fc_1): Linear(in_features=512, out_features=512, bias=True)
+  (fc_2): Linear(in_features=512, out_features=512, bias=True)
+  (fc_drop_1): Dropout(p=0.05, inplace=False)
+  (fc_drop_2): Dropout(p=0.05, inplace=False)
+  (fc_relu1): ReLU()
+  (fc_relu2): ReLU()
+  (predictor): Linear(in_features=512, out_features=1, bias=True)
+)
+2024-04-04 21:26:39,572-main.py:109-INFO-Loading model:
+2024-04-04 21:26:39,573-main.py:287-INFO-Loading pretrain: checkpoints/ckpt_best.pth
+2024-04-04 21:26:39,594-main.py:290-INFO-Loaded pretrain: checkpoints/ckpt_best.pth
+2024-04-04 21:26:40,533-main.py:457-INFO- ------------------------------------------------------------------
+2024-04-04 21:26:40,533-main.py:458-INFO- * Speed: 55.66703 ms/iter
+2024-04-04 21:26:40,534-main.py:459-INFO- * MAPE: 0.03728
+2024-04-04 21:26:40,535-main.py:460-INFO- * ErrorBound: [0.994496 0.94304  0.011712]
+2024-04-04 21:26:40,535-main.py:461-INFO- * Kendall's Tau: 0.875318861024795
+2024-04-04 21:26:40,535-main.py:462-INFO- ------------------------------------------------------------------
+2024-04-04 21:26:40,535-main.py:465-INFO- Average Latency : 27.70452201 ms
+2024-04-04 21:57:21,689-main.py:69-INFO-Loading args: 
+Namespace(all_latency_file=None, batch_size=1024, ckpt_save_freq=1000, data_root='D:/NAR/NAR-Former-V2-main/NAR-Former-V2-main/dataset/nasbench201/all.pt', dataset='nasbench201', embed_type='nerf', epochs=1000, feat_shuffle=False, ffn_ratio=4, glt_norm='LN', gpu=0, hidden_size=512, lambda_cons=0.5, lambda_sr=0.1, log='log/test.log', lr=0.0001, model_dir=None, multires_p=32, multires_x=32, n_attned_gnn=6, norm_sf=False, num_node_features=128, only_test=True, onnx_dir=None, optype='pe', override_data=False, pretrain='checkpoints/ckpt_best.pth', print_freq=50, resume=None, test_freq=1, test_model_type=None, train_model_types=None, train_num=781, train_test_stage=False, use_degree=True, warmup_rate=0.1)
+2024-04-04 21:57:21,689-main.py:76-INFO-Loading dataset:
+2024-04-04 21:57:22,850-main.py:197-INFO-Test data = 15625
+2024-04-04 21:57:23,640-main.py:101-INFO-Init Model: Net(
+  (gnn_layers): ModuleList(
+    (0): GNN_LinearAttn(
+      (lin_l): Linear(128, 512, bias=True)
+      (lin_r): Linear(128, 512, bias=False)
+      (lin_d): Linear(1, 128, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(128, 128, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (1): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (2): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (3): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (4): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (5): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+  )
+  (gnn_drops): ModuleList(
+    (0): Dropout(p=0.05, inplace=False)
+    (1): Dropout(p=0.05, inplace=False)
+    (2): Dropout(p=0.05, inplace=False)
+    (3): Dropout(p=0.05, inplace=False)
+    (4): Dropout(p=0.05, inplace=False)
+    (5): Dropout(p=0.05, inplace=False)
+  )
+  (gnn_relus): ModuleList(
+    (0): ReLU()
+    (1): ReLU()
+    (2): ReLU()
+    (3): ReLU()
+    (4): ReLU()
+    (5): ReLU()
+  )
+  (FFN_layers): ModuleList(
+    (0): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (1): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (2): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (3): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (4): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (5): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+  )
+  (layer_scale): ParameterList(
+      (0): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (1): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (2): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (3): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (4): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (5): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+  )
+  (fusion_mlp): Sequential(
+    (0): Linear(in_features=3072, out_features=768, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=768, out_features=6, bias=True)
+    (3): Sigmoid()
+  )
+  (fc_1): Linear(in_features=512, out_features=512, bias=True)
+  (fc_2): Linear(in_features=512, out_features=512, bias=True)
+  (fc_drop_1): Dropout(p=0.05, inplace=False)
+  (fc_drop_2): Dropout(p=0.05, inplace=False)
+  (fc_relu1): ReLU()
+  (fc_relu2): ReLU()
+  (predictor): Linear(in_features=512, out_features=1, bias=True)
+)
+2024-04-04 21:57:23,641-main.py:109-INFO-Loading model:
+2024-04-04 21:57:23,642-main.py:287-INFO-Loading pretrain: checkpoints/ckpt_best.pth
+2024-04-04 21:57:23,662-main.py:290-INFO-Loaded pretrain: checkpoints/ckpt_best.pth
+2024-04-04 21:57:24,815-main.py:457-INFO- ------------------------------------------------------------------
+2024-04-04 21:57:24,816-main.py:458-INFO- * Speed: 68.92587 ms/iter
+2024-04-04 21:57:24,816-main.py:459-INFO- * MAPE: 0.03728
+2024-04-04 21:57:24,816-main.py:460-INFO- * ErrorBound: [0.994496 0.94304  0.011712]
+2024-04-04 21:57:24,816-main.py:461-INFO- * Kendall's Tau: 0.875318861024795
+2024-04-04 21:57:24,816-main.py:462-INFO- ------------------------------------------------------------------
+2024-04-04 21:57:24,816-main.py:465-INFO- Average Latency : 27.70805359 ms
+2024-04-04 22:20:30,939-main.py:69-INFO-Loading args: 
+Namespace(all_latency_file=None, batch_size=1024, ckpt_save_freq=1000, data_root='D:/NAR/NAR-Former-V2-main/NAR-Former-V2-main/dataset/nasbench201/all.pt', dataset='nasbench201', embed_type='nerf', epochs=1000, feat_shuffle=False, ffn_ratio=4, glt_norm='LN', gpu=0, hidden_size=512, lambda_cons=0.5, lambda_sr=0.1, log='log/test.log', lr=0.0001, model_dir=None, multires_p=32, multires_x=32, n_attned_gnn=6, norm_sf=False, num_node_features=128, only_test=True, onnx_dir=None, optype='pe', override_data=False, pretrain='checkpoints/ckpt_best.pth', print_freq=50, resume=None, test_freq=1, test_model_type=None, train_model_types=None, train_num=781, train_test_stage=False, use_degree=True, warmup_rate=0.1)
+2024-04-04 22:20:30,939-main.py:76-INFO-Loading dataset:
+2024-04-04 22:20:32,109-main.py:197-INFO-Test data = 15625
+2024-04-04 22:20:32,904-main.py:101-INFO-Init Model: Net(
+  (gnn_layers): ModuleList(
+    (0): GNN_LinearAttn(
+      (lin_l): Linear(128, 512, bias=True)
+      (lin_r): Linear(128, 512, bias=False)
+      (lin_d): Linear(1, 128, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(128, 128, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (1): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (2): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (3): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (4): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (5): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+  )
+  (gnn_drops): ModuleList(
+    (0): Dropout(p=0.05, inplace=False)
+    (1): Dropout(p=0.05, inplace=False)
+    (2): Dropout(p=0.05, inplace=False)
+    (3): Dropout(p=0.05, inplace=False)
+    (4): Dropout(p=0.05, inplace=False)
+    (5): Dropout(p=0.05, inplace=False)
+  )
+  (gnn_relus): ModuleList(
+    (0): ReLU()
+    (1): ReLU()
+    (2): ReLU()
+    (3): ReLU()
+    (4): ReLU()
+    (5): ReLU()
+  )
+  (FFN_layers): ModuleList(
+    (0): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (1): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (2): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (3): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (4): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (5): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+  )
+  (layer_scale): ParameterList(
+      (0): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (1): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (2): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (3): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (4): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (5): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+  )
+  (fusion_mlp): Sequential(
+    (0): Linear(in_features=3072, out_features=768, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=768, out_features=6, bias=True)
+    (3): Sigmoid()
+  )
+  (fc_1): Linear(in_features=512, out_features=512, bias=True)
+  (fc_2): Linear(in_features=512, out_features=512, bias=True)
+  (fc_drop_1): Dropout(p=0.05, inplace=False)
+  (fc_drop_2): Dropout(p=0.05, inplace=False)
+  (fc_relu1): ReLU()
+  (fc_relu2): ReLU()
+  (predictor): Linear(in_features=512, out_features=1, bias=True)
+)
+2024-04-04 22:20:32,905-main.py:109-INFO-Loading model:
+2024-04-04 22:20:32,907-main.py:287-INFO-Loading pretrain: checkpoints/ckpt_best.pth
+2024-04-04 22:20:32,928-main.py:290-INFO-Loaded pretrain: checkpoints/ckpt_best.pth
+2024-04-04 22:21:11,443-main.py:69-INFO-Loading args: 
+Namespace(all_latency_file=None, batch_size=1024, ckpt_save_freq=1000, data_root='D:/NAR/NAR-Former-V2-main/NAR-Former-V2-main/dataset/nasbench201/all.pt', dataset='nasbench201', embed_type='nerf', epochs=1000, feat_shuffle=False, ffn_ratio=4, glt_norm='LN', gpu=0, hidden_size=512, lambda_cons=0.5, lambda_sr=0.1, log='log/test.log', lr=0.0001, model_dir=None, multires_p=32, multires_x=32, n_attned_gnn=6, norm_sf=False, num_node_features=128, only_test=True, onnx_dir=None, optype='pe', override_data=False, pretrain='checkpoints/ckpt_best.pth', print_freq=50, resume=None, test_freq=1, test_model_type=None, train_model_types=None, train_num=781, train_test_stage=False, use_degree=True, warmup_rate=0.1)
+2024-04-04 22:21:11,444-main.py:76-INFO-Loading dataset:
+2024-04-04 22:21:12,608-main.py:197-INFO-Test data = 15625
+2024-04-04 22:21:13,394-main.py:101-INFO-Init Model: Net(
+  (gnn_layers): ModuleList(
+    (0): GNN_LinearAttn(
+      (lin_l): Linear(128, 512, bias=True)
+      (lin_r): Linear(128, 512, bias=False)
+      (lin_d): Linear(1, 128, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(128, 128, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (1): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (2): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (3): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (4): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (5): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+  )
+  (gnn_drops): ModuleList(
+    (0): Dropout(p=0.05, inplace=False)
+    (1): Dropout(p=0.05, inplace=False)
+    (2): Dropout(p=0.05, inplace=False)
+    (3): Dropout(p=0.05, inplace=False)
+    (4): Dropout(p=0.05, inplace=False)
+    (5): Dropout(p=0.05, inplace=False)
+  )
+  (gnn_relus): ModuleList(
+    (0): ReLU()
+    (1): ReLU()
+    (2): ReLU()
+    (3): ReLU()
+    (4): ReLU()
+    (5): ReLU()
+  )
+  (FFN_layers): ModuleList(
+    (0): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (1): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (2): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (3): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (4): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (5): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+  )
+  (layer_scale): ParameterList(
+      (0): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (1): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (2): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (3): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (4): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (5): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+  )
+  (fusion_mlp): Sequential(
+    (0): Linear(in_features=3072, out_features=768, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=768, out_features=6, bias=True)
+    (3): Sigmoid()
+  )
+  (fc_1): Linear(in_features=512, out_features=512, bias=True)
+  (fc_2): Linear(in_features=512, out_features=512, bias=True)
+  (fc_drop_1): Dropout(p=0.05, inplace=False)
+  (fc_drop_2): Dropout(p=0.05, inplace=False)
+  (fc_relu1): ReLU()
+  (fc_relu2): ReLU()
+  (predictor): Linear(in_features=512, out_features=1, bias=True)
+)
+2024-04-04 22:21:13,396-main.py:109-INFO-Loading model:
+2024-04-04 22:21:13,397-main.py:287-INFO-Loading pretrain: checkpoints/ckpt_best.pth
+2024-04-04 22:21:13,418-main.py:290-INFO-Loaded pretrain: checkpoints/ckpt_best.pth
+2024-04-04 22:21:14,428-main.py:458-INFO- ------------------------------------------------------------------
+2024-04-04 22:21:14,428-main.py:459-INFO- * Speed: 59.98152 ms/iter
+2024-04-04 22:21:14,428-main.py:460-INFO- * MAPE: 0.03728
+2024-04-04 22:21:14,428-main.py:461-INFO- * ErrorBound: [0.994496 0.94304  0.011712]
+2024-04-04 22:21:14,428-main.py:462-INFO- * Kendall's Tau: 0.875318861024795
+2024-04-04 22:21:14,428-main.py:463-INFO- ------------------------------------------------------------------
+2024-04-04 22:21:14,428-main.py:466-INFO- Average Latency : 27.99670398 ms
+2024-05-23 22:47:25,583-main.py:69-INFO-Loading args: 
+Namespace(all_latency_file=None, batch_size=1024, ckpt_save_freq=1000, data_root='D:/NAR/NAR-Former-V2-main/NAR-Former-V2-main/dataset/nasbench201/all.pt', dataset='nasbench201', embed_type='nerf', epochs=1000, feat_shuffle=False, ffn_ratio=4, glt_norm='LN', gpu=0, hidden_size=512, lambda_cons=0.5, lambda_sr=0.1, log='log/test.log', lr=0.0001, model_dir=None, multires_p=32, multires_x=32, n_attned_gnn=6, norm_sf=False, num_node_features=128, only_test=True, onnx_dir=None, optype='pe', override_data=False, pretrain='checkpoints/ckpt_best.pth', print_freq=50, resume=None, test_freq=1, test_model_type=None, train_model_types=None, train_num=781, train_test_stage=False, use_degree=True, warmup_rate=0.1)
+2024-05-23 22:47:25,583-main.py:76-INFO-Loading dataset:
+2024-05-23 22:47:26,769-main.py:197-INFO-Test data = 15625
+2024-05-23 22:47:27,611-main.py:101-INFO-Init Model: Net(
+  (gnn_layers): ModuleList(
+    (0): GNN_LinearAttn(
+      (lin_l): Linear(128, 512, bias=True)
+      (lin_r): Linear(128, 512, bias=False)
+      (lin_d): Linear(1, 128, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(128, 128, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (1): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (2): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (3): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (4): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (5): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+  )
+  (gnn_drops): ModuleList(
+    (0): Dropout(p=0.05, inplace=False)
+    (1): Dropout(p=0.05, inplace=False)
+    (2): Dropout(p=0.05, inplace=False)
+    (3): Dropout(p=0.05, inplace=False)
+    (4): Dropout(p=0.05, inplace=False)
+    (5): Dropout(p=0.05, inplace=False)
+  )
+  (gnn_relus): ModuleList(
+    (0): ReLU()
+    (1): ReLU()
+    (2): ReLU()
+    (3): ReLU()
+    (4): ReLU()
+    (5): ReLU()
+  )
+  (FFN_layers): ModuleList(
+    (0): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (1): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (2): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (3): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (4): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (5): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+  )
+  (layer_scale): ParameterList(
+      (0): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (1): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (2): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (3): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (4): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (5): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+  )
+  (fusion_mlp): Sequential(
+    (0): Linear(in_features=3072, out_features=768, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=768, out_features=6, bias=True)
+    (3): Sigmoid()
+  )
+  (fc_1): Linear(in_features=512, out_features=512, bias=True)
+  (fc_2): Linear(in_features=512, out_features=512, bias=True)
+  (fc_drop_1): Dropout(p=0.05, inplace=False)
+  (fc_drop_2): Dropout(p=0.05, inplace=False)
+  (fc_relu1): ReLU()
+  (fc_relu2): ReLU()
+  (predictor): Linear(in_features=512, out_features=1, bias=True)
+)
+2024-05-23 22:47:27,612-main.py:109-INFO-Loading model:
+2024-05-23 22:47:27,614-main.py:287-INFO-Loading pretrain: checkpoints/ckpt_best.pth
+2024-05-23 22:47:27,672-main.py:290-INFO-Loaded pretrain: checkpoints/ckpt_best.pth
+2024-05-23 22:47:28,680-main.py:461-INFO- ------------------------------------------------------------------
+2024-05-23 22:47:28,680-main.py:462-INFO- * Speed: 59.78575 ms/iter
+2024-05-23 22:47:28,680-main.py:463-INFO- * MAPE: 0.03728
+2024-05-23 22:47:28,680-main.py:464-INFO- * ErrorBound: [0.994496 0.94304  0.011712]
+2024-05-23 22:47:28,680-main.py:465-INFO- * Kendall's Tau: 0.875318861024795
+2024-05-23 22:47:28,681-main.py:466-INFO- ------------------------------------------------------------------
+2024-05-23 22:47:28,681-main.py:469-INFO- Average Latency : 49.83405769 ms
+2024-05-29 19:23:21,887-main.py:69-INFO-Loading args: 
+Namespace(all_latency_file=None, batch_size=1024, ckpt_save_freq=1000, data_root='D:/NAR/NAR-Former-V2-main/NAR-Former-V2-main/dataset/nasbench201/all.pt', dataset='nasbench201', embed_type='nerf', epochs=1000, feat_shuffle=False, ffn_ratio=4, glt_norm='LN', gpu=0, hidden_size=512, lambda_cons=0.5, lambda_sr=0.1, log='log/test.log', lr=0.0001, model_dir=None, multires_p=32, multires_x=32, n_attned_gnn=6, norm_sf=False, num_node_features=128, only_test=True, onnx_dir=None, optype='pe', override_data=False, pretrain='checkpoints/ckpt_best.pth', print_freq=50, resume=None, test_freq=1, test_model_type=None, train_model_types=None, train_num=781, train_test_stage=False, use_degree=True, warmup_rate=0.1)
+2024-05-29 19:23:21,888-main.py:76-INFO-Loading dataset:
+2024-05-29 19:23:23,099-main.py:197-INFO-Test data = 15625
+2024-05-29 19:23:24,401-main.py:101-INFO-Init Model: Net(
+  (gnn_layers): ModuleList(
+    (0): GNN_LinearAttn(
+      (lin_l): Linear(128, 512, bias=True)
+      (lin_r): Linear(128, 512, bias=False)
+      (lin_d): Linear(1, 128, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(128, 128, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (1): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (2): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (3): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (4): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (5): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+  )
+  (gnn_drops): ModuleList(
+    (0): Dropout(p=0.05, inplace=False)
+    (1): Dropout(p=0.05, inplace=False)
+    (2): Dropout(p=0.05, inplace=False)
+    (3): Dropout(p=0.05, inplace=False)
+    (4): Dropout(p=0.05, inplace=False)
+    (5): Dropout(p=0.05, inplace=False)
+  )
+  (gnn_relus): ModuleList(
+    (0): ReLU()
+    (1): ReLU()
+    (2): ReLU()
+    (3): ReLU()
+    (4): ReLU()
+    (5): ReLU()
+  )
+  (FFN_layers): ModuleList(
+    (0): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (1): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (2): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (3): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (4): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (5): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+  )
+  (layer_scale): ParameterList(
+      (0): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (1): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (2): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (3): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (4): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (5): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+  )
+  (fusion_mlp): Sequential(
+    (0): Linear(in_features=3072, out_features=768, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=768, out_features=6, bias=True)
+    (3): Sigmoid()
+  )
+  (fc_1): Linear(in_features=512, out_features=512, bias=True)
+  (fc_2): Linear(in_features=512, out_features=512, bias=True)
+  (fc_drop_1): Dropout(p=0.05, inplace=False)
+  (fc_drop_2): Dropout(p=0.05, inplace=False)
+  (fc_relu1): ReLU()
+  (fc_relu2): ReLU()
+  (predictor): Linear(in_features=512, out_features=1, bias=True)
+)
+2024-05-29 19:23:24,402-main.py:109-INFO-Loading model:
+2024-05-29 19:23:24,403-main.py:287-INFO-Loading pretrain: checkpoints/ckpt_best.pth
+2024-05-29 19:23:24,465-main.py:290-INFO-Loaded pretrain: checkpoints/ckpt_best.pth
+2024-05-29 19:23:25,824-main.py:461-INFO- ------------------------------------------------------------------
+2024-05-29 19:23:25,824-main.py:462-INFO- * Speed: 76.85709 ms/iter
+2024-05-29 19:23:25,824-main.py:463-INFO- * MAPE: 0.03728
+2024-05-29 19:23:25,824-main.py:464-INFO- * ErrorBound: [0.994496 0.94304  0.011712]
+2024-05-29 19:23:25,824-main.py:465-INFO- * Kendall's Tau: 0.875318861024795
+2024-05-29 19:23:25,825-main.py:466-INFO- ------------------------------------------------------------------
+2024-05-29 19:23:25,825-main.py:469-INFO- Average Latency : 66.65612757 ms
+2024-05-29 19:30:23,573-main.py:69-INFO-Loading args: 
+Namespace(all_latency_file=None, batch_size=1024, ckpt_save_freq=1000, data_root='D:/NAR/NAR-Former-V2-main/NAR-Former-V2-main/dataset/nasbench201/all.pt', dataset='nasbench201', embed_type='nerf', epochs=1000, feat_shuffle=False, ffn_ratio=4, glt_norm='LN', gpu=0, hidden_size=512, lambda_cons=0.5, lambda_sr=0.1, log='log/test.log', lr=0.0001, model_dir=None, multires_p=32, multires_x=32, n_attned_gnn=6, norm_sf=False, num_node_features=128, only_test=True, onnx_dir=None, optype='pe', override_data=False, pretrain='checkpoints/ckpt_best.pth', print_freq=50, resume=None, test_freq=1, test_model_type=None, train_model_types=None, train_num=781, train_test_stage=False, use_degree=True, warmup_rate=0.1)
+2024-05-29 19:30:23,574-main.py:76-INFO-Loading dataset:
+2024-05-29 19:30:36,735-main.py:197-INFO-Test data = 15625
+2024-05-29 19:30:37,507-main.py:101-INFO-Init Model: Net(
+  (gnn_layers): ModuleList(
+    (0): GNN_LinearAttn(
+      (lin_l): Linear(128, 512, bias=True)
+      (lin_r): Linear(128, 512, bias=False)
+      (lin_d): Linear(1, 128, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(128, 128, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (1): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (2): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (3): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (4): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (5): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+  )
+  (gnn_drops): ModuleList(
+    (0): Dropout(p=0.05, inplace=False)
+    (1): Dropout(p=0.05, inplace=False)
+    (2): Dropout(p=0.05, inplace=False)
+    (3): Dropout(p=0.05, inplace=False)
+    (4): Dropout(p=0.05, inplace=False)
+    (5): Dropout(p=0.05, inplace=False)
+  )
+  (gnn_relus): ModuleList(
+    (0): ReLU()
+    (1): ReLU()
+    (2): ReLU()
+    (3): ReLU()
+    (4): ReLU()
+    (5): ReLU()
+  )
+  (FFN_layers): ModuleList(
+    (0): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (1): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (2): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (3): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (4): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (5): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+  )
+  (layer_scale): ParameterList(
+      (0): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (1): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (2): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (3): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (4): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (5): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+  )
+  (fusion_mlp): Sequential(
+    (0): Linear(in_features=3072, out_features=768, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=768, out_features=6, bias=True)
+    (3): Sigmoid()
+  )
+  (fc_1): Linear(in_features=512, out_features=512, bias=True)
+  (fc_2): Linear(in_features=512, out_features=512, bias=True)
+  (fc_drop_1): Dropout(p=0.05, inplace=False)
+  (fc_drop_2): Dropout(p=0.05, inplace=False)
+  (fc_relu1): ReLU()
+  (fc_relu2): ReLU()
+  (predictor): Linear(in_features=512, out_features=1, bias=True)
+)
+2024-05-29 19:30:37,508-main.py:109-INFO-Loading model:
+2024-05-29 19:30:37,509-main.py:287-INFO-Loading pretrain: checkpoints/ckpt_best.pth
+2024-05-29 19:30:37,529-main.py:290-INFO-Loaded pretrain: checkpoints/ckpt_best.pth
+2024-05-29 19:30:38,493-main.py:461-INFO- ------------------------------------------------------------------
+2024-05-29 19:30:38,493-main.py:462-INFO- * Speed: 57.08018 ms/iter
+2024-05-29 19:30:38,493-main.py:463-INFO- * MAPE: 0.03728
+2024-05-29 19:30:38,493-main.py:464-INFO- * ErrorBound: [0.994496 0.94304  0.011712]
+2024-05-29 19:30:38,493-main.py:465-INFO- * Kendall's Tau: 0.875318861024795
+2024-05-29 19:30:38,494-main.py:466-INFO- ------------------------------------------------------------------
+2024-05-29 19:30:38,494-main.py:469-INFO- Average Latency : 47.36258090 ms
+2024-05-29 19:36:24,314-main.py:69-INFO-Loading args: 
+Namespace(all_latency_file=None, batch_size=1024, ckpt_save_freq=1000, data_root='D:/NAR/NAR-Former-V2-main/NAR-Former-V2-main/dataset/nasbench201/all.pt', dataset='nasbench201', embed_type='nerf', epochs=1000, feat_shuffle=False, ffn_ratio=4, glt_norm='LN', gpu=0, hidden_size=512, lambda_cons=0.5, lambda_sr=0.1, log='log/test.log', lr=0.0001, model_dir=None, multires_p=32, multires_x=32, n_attned_gnn=6, norm_sf=False, num_node_features=128, only_test=True, onnx_dir=None, optype='pe', override_data=False, pretrain='checkpoints/ckpt_best.pth', print_freq=50, resume=None, test_freq=1, test_model_type=None, train_model_types=None, train_num=781, train_test_stage=False, use_degree=True, warmup_rate=0.1)
+2024-05-29 19:36:24,314-main.py:76-INFO-Loading dataset:
+2024-05-29 19:36:53,623-main.py:197-INFO-Test data = 15625
+2024-05-29 19:36:54,857-main.py:101-INFO-Init Model: Net(
+  (gnn_layers): ModuleList(
+    (0): GNN_LinearAttn(
+      (lin_l): Linear(128, 512, bias=True)
+      (lin_r): Linear(128, 512, bias=False)
+      (lin_d): Linear(1, 128, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(128, 128, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (1): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (2): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (3): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (4): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (5): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+  )
+  (gnn_drops): ModuleList(
+    (0): Dropout(p=0.05, inplace=False)
+    (1): Dropout(p=0.05, inplace=False)
+    (2): Dropout(p=0.05, inplace=False)
+    (3): Dropout(p=0.05, inplace=False)
+    (4): Dropout(p=0.05, inplace=False)
+    (5): Dropout(p=0.05, inplace=False)
+  )
+  (gnn_relus): ModuleList(
+    (0): ReLU()
+    (1): ReLU()
+    (2): ReLU()
+    (3): ReLU()
+    (4): ReLU()
+    (5): ReLU()
+  )
+  (FFN_layers): ModuleList(
+    (0): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (1): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (2): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (3): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (4): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (5): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+  )
+  (layer_scale): ParameterList(
+      (0): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (1): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (2): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (3): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (4): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (5): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+  )
+  (fusion_mlp): Sequential(
+    (0): Linear(in_features=3072, out_features=768, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=768, out_features=6, bias=True)
+    (3): Sigmoid()
+  )
+  (fc_1): Linear(in_features=512, out_features=512, bias=True)
+  (fc_2): Linear(in_features=512, out_features=512, bias=True)
+  (fc_drop_1): Dropout(p=0.05, inplace=False)
+  (fc_drop_2): Dropout(p=0.05, inplace=False)
+  (fc_relu1): ReLU()
+  (fc_relu2): ReLU()
+  (predictor): Linear(in_features=512, out_features=1, bias=True)
+)
+2024-05-29 19:36:54,859-main.py:109-INFO-Loading model:
+2024-05-29 19:36:54,860-main.py:287-INFO-Loading pretrain: checkpoints/ckpt_best.pth
+2024-05-29 19:36:54,898-main.py:290-INFO-Loaded pretrain: checkpoints/ckpt_best.pth
+2024-05-29 19:36:56,279-main.py:461-INFO- ------------------------------------------------------------------
+2024-05-29 19:36:56,279-main.py:462-INFO- * Speed: 81.15856 ms/iter
+2024-05-29 19:36:56,279-main.py:463-INFO- * MAPE: 0.03728
+2024-05-29 19:36:56,279-main.py:464-INFO- * ErrorBound: [0.994496 0.94304  0.011712]
+2024-05-29 19:36:56,280-main.py:465-INFO- * Kendall's Tau: 0.875318861024795
+2024-05-29 19:36:56,280-main.py:466-INFO- ------------------------------------------------------------------
+2024-05-29 19:36:56,280-main.py:469-INFO- Average Latency : 63.34334612 ms
+2024-05-29 23:52:20,181-main.py:69-INFO-Loading args: 
+Namespace(all_latency_file=None, batch_size=1024, ckpt_save_freq=1000, data_root='D:/NAR/NAR-Former-V2-main/NAR-Former-V2-main/dataset/nasbench201/all.pt', dataset='nasbench201', embed_type='nerf', epochs=1000, feat_shuffle=False, ffn_ratio=4, glt_norm='LN', gpu=0, hidden_size=512, lambda_cons=0.5, lambda_sr=0.1, log='log/test.log', lr=0.0001, model_dir=None, multires_p=32, multires_x=32, n_attned_gnn=6, norm_sf=False, num_node_features=128, only_test=True, onnx_dir=None, optype='pe', override_data=False, pretrain='checkpoints/ckpt_best.pth', print_freq=50, resume=None, test_freq=1, test_model_type=None, train_model_types=None, train_num=781, train_test_stage=False, use_degree=True, warmup_rate=0.1)
+2024-05-29 23:52:20,181-main.py:76-INFO-Loading dataset:
+2024-05-29 23:52:48,034-main.py:197-INFO-Test data = 15625
+2024-05-29 23:52:48,824-main.py:101-INFO-Init Model: Net(
+  (gnn_layers): ModuleList(
+    (0): GNN_LinearAttn(
+      (lin_l): Linear(128, 512, bias=True)
+      (lin_r): Linear(128, 512, bias=False)
+      (lin_d): Linear(1, 128, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(128, 128, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (1): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (2): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (3): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (4): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (5): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+  )
+  (gnn_drops): ModuleList(
+    (0): Dropout(p=0.05, inplace=False)
+    (1): Dropout(p=0.05, inplace=False)
+    (2): Dropout(p=0.05, inplace=False)
+    (3): Dropout(p=0.05, inplace=False)
+    (4): Dropout(p=0.05, inplace=False)
+    (5): Dropout(p=0.05, inplace=False)
+  )
+  (gnn_relus): ModuleList(
+    (0): ReLU()
+    (1): ReLU()
+    (2): ReLU()
+    (3): ReLU()
+    (4): ReLU()
+    (5): ReLU()
+  )
+  (FFN_layers): ModuleList(
+    (0): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (1): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (2): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (3): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (4): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (5): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+  )
+  (layer_scale): ParameterList(
+      (0): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (1): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (2): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (3): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (4): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (5): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+  )
+  (fusion_mlp): Sequential(
+    (0): Linear(in_features=3072, out_features=768, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=768, out_features=6, bias=True)
+    (3): Sigmoid()
+  )
+  (fc_1): Linear(in_features=512, out_features=512, bias=True)
+  (fc_2): Linear(in_features=512, out_features=512, bias=True)
+  (fc_drop_1): Dropout(p=0.05, inplace=False)
+  (fc_drop_2): Dropout(p=0.05, inplace=False)
+  (fc_relu1): ReLU()
+  (fc_relu2): ReLU()
+  (predictor): Linear(in_features=512, out_features=1, bias=True)
+)
+2024-05-29 23:52:48,825-main.py:109-INFO-Loading model:
+2024-05-29 23:52:48,826-main.py:287-INFO-Loading pretrain: checkpoints/ckpt_best.pth
+2024-05-29 23:52:48,845-main.py:290-INFO-Loaded pretrain: checkpoints/ckpt_best.pth
+2024-05-29 23:52:50,128-main.py:463-INFO- ------------------------------------------------------------------
+2024-05-29 23:52:50,128-main.py:464-INFO- * Speed: 77.06843 ms/iter
+2024-05-29 23:52:50,128-main.py:465-INFO- * MAPE: 0.03728
+2024-05-29 23:52:50,128-main.py:466-INFO- * ErrorBound: [0.994496 0.94304  0.011712]
+2024-05-29 23:52:50,128-main.py:467-INFO- * Kendall's Tau: 0.875318861024795
+2024-05-29 23:52:50,128-main.py:468-INFO- ------------------------------------------------------------------
+2024-05-29 23:52:50,128-main.py:471-INFO- Average Latency : 47.84654081 ms
+2024-05-30 00:00:28,445-main.py:69-INFO-Loading args: 
+Namespace(all_latency_file=None, batch_size=1024, ckpt_save_freq=1000, data_root='D:/NAR/NAR-Former-V2-main/NAR-Former-V2-main/dataset/nasbench201/all.pt', dataset='nasbench201', embed_type='nerf', epochs=1000, feat_shuffle=False, ffn_ratio=4, glt_norm='LN', gpu=0, hidden_size=512, lambda_cons=0.5, lambda_sr=0.1, log='log/test.log', lr=0.0001, model_dir=None, multires_p=32, multires_x=32, n_attned_gnn=6, norm_sf=False, num_node_features=128, only_test=True, onnx_dir=None, optype='pe', override_data=False, pretrain='checkpoints/ckpt_best.pth', print_freq=50, resume=None, test_freq=1, test_model_type=None, train_model_types=None, train_num=781, train_test_stage=False, use_degree=True, warmup_rate=0.1)
+2024-05-30 00:00:28,445-main.py:76-INFO-Loading dataset:
+2024-05-30 00:00:55,486-main.py:197-INFO-Test data = 15625
+2024-05-30 00:00:56,282-main.py:101-INFO-Init Model: Net(
+  (gnn_layers): ModuleList(
+    (0): GNN_LinearAttn(
+      (lin_l): Linear(128, 512, bias=True)
+      (lin_r): Linear(128, 512, bias=False)
+      (lin_d): Linear(1, 128, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(128, 128, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (1): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (2): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (3): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (4): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (5): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+  )
+  (gnn_drops): ModuleList(
+    (0): Dropout(p=0.05, inplace=False)
+    (1): Dropout(p=0.05, inplace=False)
+    (2): Dropout(p=0.05, inplace=False)
+    (3): Dropout(p=0.05, inplace=False)
+    (4): Dropout(p=0.05, inplace=False)
+    (5): Dropout(p=0.05, inplace=False)
+  )
+  (gnn_relus): ModuleList(
+    (0): ReLU()
+    (1): ReLU()
+    (2): ReLU()
+    (3): ReLU()
+    (4): ReLU()
+    (5): ReLU()
+  )
+  (FFN_layers): ModuleList(
+    (0): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (1): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (2): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (3): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (4): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (5): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+  )
+  (layer_scale): ParameterList(
+      (0): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (1): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (2): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (3): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (4): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (5): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+  )
+  (fusion_mlp): Sequential(
+    (0): Linear(in_features=3072, out_features=768, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=768, out_features=6, bias=True)
+    (3): Sigmoid()
+  )
+  (fc_1): Linear(in_features=512, out_features=512, bias=True)
+  (fc_2): Linear(in_features=512, out_features=512, bias=True)
+  (fc_drop_1): Dropout(p=0.05, inplace=False)
+  (fc_drop_2): Dropout(p=0.05, inplace=False)
+  (fc_relu1): ReLU()
+  (fc_relu2): ReLU()
+  (predictor): Linear(in_features=512, out_features=1, bias=True)
+)
+2024-05-30 00:00:56,283-main.py:109-INFO-Loading model:
+2024-05-30 00:00:56,283-main.py:287-INFO-Loading pretrain: checkpoints/ckpt_best.pth
+2024-05-30 00:00:56,303-main.py:290-INFO-Loaded pretrain: checkpoints/ckpt_best.pth
+2024-05-30 00:00:57,596-main.py:463-INFO- ------------------------------------------------------------------
+2024-05-30 00:00:57,596-main.py:464-INFO- * Speed: 77.66156 ms/iter
+2024-05-30 00:00:57,596-main.py:465-INFO- * MAPE: 0.03728
+2024-05-30 00:00:57,596-main.py:466-INFO- * ErrorBound: [0.994496 0.94304  0.011712]
+2024-05-30 00:00:57,596-main.py:467-INFO- * Kendall's Tau: 0.875318861024795
+2024-05-30 00:00:57,596-main.py:468-INFO- ------------------------------------------------------------------
+2024-05-30 00:00:57,596-main.py:471-INFO- Average Latency : 48.41819406 ms
+2024-05-30 00:09:56,056-main.py:69-INFO-Loading args: 
+Namespace(all_latency_file=None, batch_size=1024, ckpt_save_freq=1000, data_root='D:/NAR/NAR-Former-V2-main/NAR-Former-V2-main/dataset/nasbench201/all.pt', dataset='nasbench201', embed_type='nerf', epochs=1000, feat_shuffle=False, ffn_ratio=4, glt_norm='LN', gpu=0, hidden_size=512, lambda_cons=0.5, lambda_sr=0.1, log='log/test.log', lr=0.0001, model_dir=None, multires_p=32, multires_x=32, n_attned_gnn=6, norm_sf=False, num_node_features=128, only_test=True, onnx_dir=None, optype='pe', override_data=False, pretrain='checkpoints/ckpt_best.pth', print_freq=50, resume=None, test_freq=1, test_model_type=None, train_model_types=None, train_num=781, train_test_stage=False, use_degree=True, warmup_rate=0.1)
+2024-05-30 00:09:56,056-main.py:76-INFO-Loading dataset:
+2024-05-30 00:10:22,926-main.py:197-INFO-Test data = 15625
+2024-05-30 00:10:23,721-main.py:101-INFO-Init Model: Net(
+  (gnn_layers): ModuleList(
+    (0): GNN_LinearAttn(
+      (lin_l): Linear(128, 512, bias=True)
+      (lin_r): Linear(128, 512, bias=False)
+      (lin_d): Linear(1, 128, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(128, 128, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (1): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (2): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (3): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (4): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (5): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+  )
+  (gnn_drops): ModuleList(
+    (0): Dropout(p=0.05, inplace=False)
+    (1): Dropout(p=0.05, inplace=False)
+    (2): Dropout(p=0.05, inplace=False)
+    (3): Dropout(p=0.05, inplace=False)
+    (4): Dropout(p=0.05, inplace=False)
+    (5): Dropout(p=0.05, inplace=False)
+  )
+  (gnn_relus): ModuleList(
+    (0): ReLU()
+    (1): ReLU()
+    (2): ReLU()
+    (3): ReLU()
+    (4): ReLU()
+    (5): ReLU()
+  )
+  (FFN_layers): ModuleList(
+    (0): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (1): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (2): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (3): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (4): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (5): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+  )
+  (layer_scale): ParameterList(
+      (0): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (1): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (2): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (3): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (4): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (5): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+  )
+  (fusion_mlp): Sequential(
+    (0): Linear(in_features=3072, out_features=768, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=768, out_features=6, bias=True)
+    (3): Sigmoid()
+  )
+  (fc_1): Linear(in_features=512, out_features=512, bias=True)
+  (fc_2): Linear(in_features=512, out_features=512, bias=True)
+  (fc_drop_1): Dropout(p=0.05, inplace=False)
+  (fc_drop_2): Dropout(p=0.05, inplace=False)
+  (fc_relu1): ReLU()
+  (fc_relu2): ReLU()
+  (predictor): Linear(in_features=512, out_features=1, bias=True)
+)
+2024-05-30 00:10:23,722-main.py:109-INFO-Loading model:
+2024-05-30 00:10:23,723-main.py:287-INFO-Loading pretrain: checkpoints/ckpt_best.pth
+2024-05-30 00:10:23,743-main.py:290-INFO-Loaded pretrain: checkpoints/ckpt_best.pth
+2024-05-30 00:10:25,027-main.py:463-INFO- ------------------------------------------------------------------
+2024-05-30 00:10:25,027-main.py:464-INFO- * Speed: 77.15213 ms/iter
+2024-05-30 00:10:25,027-main.py:465-INFO- * MAPE: 0.03728
+2024-05-30 00:10:25,027-main.py:466-INFO- * ErrorBound: [0.994496 0.94304  0.011712]
+2024-05-30 00:10:25,028-main.py:467-INFO- * Kendall's Tau: 0.875318861024795
+2024-05-30 00:10:25,028-main.py:468-INFO- ------------------------------------------------------------------
+2024-05-30 00:10:25,028-main.py:471-INFO- Average Latency : 48.02240431 ms
+2024-06-03 18:37:13,283-main.py:69-INFO-Loading args: 
+Namespace(all_latency_file=None, batch_size=1024, ckpt_save_freq=1000, data_root='D:/NAR/NAR-Former-V2-main/NAR-Former-V2-main/dataset/nasbench201/all.pt', dataset='nasbench201', embed_type='nerf', epochs=1000, feat_shuffle=False, ffn_ratio=4, glt_norm='LN', gpu=0, hidden_size=512, lambda_cons=0.5, lambda_sr=0.1, log='log/test.log', lr=0.0001, model_dir=None, multires_p=32, multires_x=32, n_attned_gnn=6, norm_sf=False, num_node_features=128, only_test=True, onnx_dir=None, optype='pe', override_data=False, pretrain='checkpoints/ckpt_best.pth', print_freq=50, resume=None, test_freq=1, test_model_type=None, train_model_types=None, train_num=781, train_test_stage=False, use_degree=True, warmup_rate=0.1)
+2024-06-03 18:37:13,285-main.py:76-INFO-Loading dataset:
+2024-06-03 18:37:40,934-main.py:197-INFO-Test data = 15625
+2024-06-03 18:37:42,259-main.py:101-INFO-Init Model: Net(
+  (gnn_layers): ModuleList(
+    (0): GNN_LinearAttn(
+      (lin_l): Linear(128, 512, bias=True)
+      (lin_r): Linear(128, 512, bias=False)
+      (lin_d): Linear(1, 128, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(128, 128, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (1): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (2): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (3): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (4): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (5): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+  )
+  (gnn_drops): ModuleList(
+    (0): Dropout(p=0.05, inplace=False)
+    (1): Dropout(p=0.05, inplace=False)
+    (2): Dropout(p=0.05, inplace=False)
+    (3): Dropout(p=0.05, inplace=False)
+    (4): Dropout(p=0.05, inplace=False)
+    (5): Dropout(p=0.05, inplace=False)
+  )
+  (gnn_relus): ModuleList(
+    (0): ReLU()
+    (1): ReLU()
+    (2): ReLU()
+    (3): ReLU()
+    (4): ReLU()
+    (5): ReLU()
+  )
+  (FFN_layers): ModuleList(
+    (0): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (1): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (2): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (3): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (4): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (5): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+  )
+  (layer_scale): ParameterList(
+      (0): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (1): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (2): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (3): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (4): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (5): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+  )
+  (fusion_mlp): Sequential(
+    (0): Linear(in_features=3072, out_features=768, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=768, out_features=6, bias=True)
+    (3): Sigmoid()
+  )
+  (fc_1): Linear(in_features=512, out_features=512, bias=True)
+  (fc_2): Linear(in_features=512, out_features=512, bias=True)
+  (fc_drop_1): Dropout(p=0.05, inplace=False)
+  (fc_drop_2): Dropout(p=0.05, inplace=False)
+  (fc_relu1): ReLU()
+  (fc_relu2): ReLU()
+  (predictor): Linear(in_features=512, out_features=1, bias=True)
+)
+2024-06-03 18:37:42,260-main.py:109-INFO-Loading model:
+2024-06-03 18:37:42,261-main.py:287-INFO-Loading pretrain: checkpoints/ckpt_best.pth
+2024-06-03 18:37:42,326-main.py:290-INFO-Loaded pretrain: checkpoints/ckpt_best.pth
+2024-06-03 18:37:43,950-main.py:463-INFO- ------------------------------------------------------------------
+2024-06-03 18:37:43,950-main.py:464-INFO- * Speed: 94.23679 ms/iter
+2024-06-03 18:37:43,950-main.py:465-INFO- * MAPE: 0.03728
+2024-06-03 18:37:43,950-main.py:466-INFO- * ErrorBound: [0.994496 0.94304  0.011712]
+2024-06-03 18:37:43,950-main.py:467-INFO- * Kendall's Tau: 0.875318861024795
+2024-06-03 18:37:43,950-main.py:468-INFO- ------------------------------------------------------------------
+2024-06-03 18:37:43,950-main.py:471-INFO- Average Latency : 64.94896114 ms
+2024-06-03 18:40:48,529-main.py:69-INFO-Loading args: 
+Namespace(all_latency_file=None, batch_size=1024, ckpt_save_freq=1000, data_root='D:/NAR/NAR-Former-V2-main/NAR-Former-V2-main/dataset/nasbench201/all.pt', dataset='nasbench201', embed_type='nerf', epochs=1000, feat_shuffle=False, ffn_ratio=4, glt_norm='LN', gpu=0, hidden_size=512, lambda_cons=0.5, lambda_sr=0.1, log='log/test.log', lr=0.0001, model_dir=None, multires_p=32, multires_x=32, n_attned_gnn=6, norm_sf=False, num_node_features=128, only_test=True, onnx_dir=None, optype='pe', override_data=False, pretrain='checkpoints/ckpt_best.pth', print_freq=50, resume=None, test_freq=1, test_model_type=None, train_model_types=None, train_num=781, train_test_stage=False, use_degree=True, warmup_rate=0.1)
+2024-06-03 18:40:48,529-main.py:76-INFO-Loading dataset:
+2024-06-03 18:41:15,949-main.py:197-INFO-Test data = 15625
+2024-06-03 18:41:16,727-main.py:101-INFO-Init Model: Net(
+  (gnn_layers): ModuleList(
+    (0): GNN_LinearAttn(
+      (lin_l): Linear(128, 512, bias=True)
+      (lin_r): Linear(128, 512, bias=False)
+      (lin_d): Linear(1, 128, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(128, 128, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (1): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (2): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (3): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (4): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+    (5): GNN_LinearAttn(
+      (lin_l): Linear(512, 512, bias=True)
+      (lin_r): Linear(512, 512, bias=False)
+      (lin_d): Linear(1, 512, bias=True)
+      (sigmoid_d): Sigmoid()
+      (lin_qk): Linear(512, 512, bias=True)
+      (sigmoid_qk): Sigmoid()
+    )
+  )
+  (gnn_drops): ModuleList(
+    (0): Dropout(p=0.05, inplace=False)
+    (1): Dropout(p=0.05, inplace=False)
+    (2): Dropout(p=0.05, inplace=False)
+    (3): Dropout(p=0.05, inplace=False)
+    (4): Dropout(p=0.05, inplace=False)
+    (5): Dropout(p=0.05, inplace=False)
+  )
+  (gnn_relus): ModuleList(
+    (0): ReLU()
+    (1): ReLU()
+    (2): ReLU()
+    (3): ReLU()
+    (4): ReLU()
+    (5): ReLU()
+  )
+  (FFN_layers): ModuleList(
+    (0): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (1): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (2): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (3): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (4): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+    (5): PreNorm(
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (fn): GroupedFeedForward(
+        (net): Sequential(
+          (0): GroupLinear(
+            (normalization_fn): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ReLU()
+          (2): Dropout(p=0.05, inplace=False)
+          (3): GroupLinear(
+            (normalization_fn): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): Dropout(p=0.05, inplace=False)
+        )
+      )
+    )
+  )
+  (layer_scale): ParameterList(
+      (0): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (1): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (2): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (3): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (4): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+      (5): Parameter containing: [torch.cuda.FloatTensor of size 512 (GPU 0)]
+  )
+  (fusion_mlp): Sequential(
+    (0): Linear(in_features=3072, out_features=768, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=768, out_features=6, bias=True)
+    (3): Sigmoid()
+  )
+  (fc_1): Linear(in_features=512, out_features=512, bias=True)
+  (fc_2): Linear(in_features=512, out_features=512, bias=True)
+  (fc_drop_1): Dropout(p=0.05, inplace=False)
+  (fc_drop_2): Dropout(p=0.05, inplace=False)
+  (fc_relu1): ReLU()
+  (fc_relu2): ReLU()
+  (predictor): Linear(in_features=512, out_features=1, bias=True)
+)
+2024-06-03 18:41:16,728-main.py:109-INFO-Loading model:
+2024-06-03 18:41:16,728-main.py:287-INFO-Loading pretrain: checkpoints/ckpt_best.pth
+2024-06-03 18:41:16,747-main.py:290-INFO-Loaded pretrain: checkpoints/ckpt_best.pth
+2024-06-03 18:41:18,026-main.py:463-INFO- ------------------------------------------------------------------
+2024-06-03 18:41:18,026-main.py:464-INFO- * Speed: 76.68228 ms/iter
+2024-06-03 18:41:18,026-main.py:465-INFO- * MAPE: 0.03728
+2024-06-03 18:41:18,026-main.py:466-INFO- * ErrorBound: [0.994496 0.94304  0.011712]
+2024-06-03 18:41:18,026-main.py:467-INFO- * Kendall's Tau: 0.875318861024795
+2024-06-03 18:41:18,026-main.py:468-INFO- ------------------------------------------------------------------
+2024-06-03 18:41:18,027-main.py:471-INFO- Average Latency : 47.43546247 ms
