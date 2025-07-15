@@ -3,7 +3,7 @@
 # Model Slicing
 The input file is `input.json` and the output file is `output.json`.
 
-```bash
+
 python ./NAR-predictor/dp2.py input.json output.json
 
 #LLM Fine-tuning
