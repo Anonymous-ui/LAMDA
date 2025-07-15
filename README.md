@@ -8,6 +8,11 @@ The input file is `input.json` and the output file is `output.json`.
 python ./NAR-predictor/dp2.py input.json output.json
 ```
 
+## LLM Fine-tuning Dataset
+```bash
+unzip ./train001.zip
+```
+
 ## LLM Fine-tuning
 ```bash
 git clone https://github.com/QwenLM/Qwen.git
