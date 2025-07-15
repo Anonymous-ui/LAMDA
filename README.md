@@ -1,7 +1,5 @@
 # LAMDA
 
-## Data preparation
-Download the `unseen_structure` part of [NNLQP](https://github.com/ModelTC/NNLQP) and put it in `dataset/`. Download the `dataset/unseen_structure/gt_stage.txt` and put it in `dataset/unseen_structure/`.
 
 ## Model Slicing
 The input file is `input.json` and the output file is `output.json`.
@@ -28,6 +26,9 @@ python decode_V2.py
 ```
 
 ## Latency Predictor
+
+### Data preparation
+Download the `unseen_structure` part of [NNLQP](https://github.com/ModelTC/NNLQP) and put it in `dataset/`. Download the `dataset/unseen_structure/gt_stage.txt` and put it in `dataset/unseen_structure/`.
 
 ### Train NAR-Former V2
 You can directly download the `experiments/latency_prediction/in_domain/checkpoints/ckpt_best.pth` or train from scratch following the steps below:
