@@ -1,5 +1,18 @@
 # LAMDA
-
+## Environmental requirements
+sudo apt-get install build-essential linux-generic libmpich-dev libopenmpi-dev
+conda create -n Qwen python=3.10
+pip install torch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 --index-url https://download.pytorch.org/whl/cu118
+pip install -r requirement.txt
+pip install torch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 --index-url https://download.pytorch.org/whl/cu118
+pip install transformers==4.32.0 accelerate tiktoken einops scipy transformers_stream_generator==0.0.4 peft deepspeed mpi4py
+pip install auto-gptq optimum
+conda install mpi4py
+git clone https://github.com/Dao-AILab/flash-attention
+cd flash-attention && pip install .
+sudo apt-get install protobuf-compiler libprotoc-dev cmake
+pip install scipy torch_geometric torch_scatter onnx==1.8.1 networkx
+pip install protobuf==3.20.0 pyproject numpy==1.20.0
 
 ## Model Slicing
 The input file is `input.json` and the output file is `output.json`.
