@@ -1,4 +1,3 @@
-# NAR-Former V2: Rethinking Transformer for Universal Neural Network Representation Learning
 
 This is the source code for paper:<br> 
 [NAR-Former V2: Rethinking Transformer for Universal Neural Network Representation Learning](https://arxiv.org/abs/2306.10792)
@@ -68,15 +67,4 @@ bash test.sh
 
             |--...
 
-    |--nasbench101
 
-        |__all.pt
-
-    |__nasbench201
-
-        |__all.pt
-
-## Acknowledge
-1. [NAS-Bench-101](https://github.com/google-research/nasbench)
-2. [NAS-Bench-201](https://github.com/D-X-Y/NAS-Bench-201)
-3. [NNLQP](https://github.com/auroua/NPENASv1)
