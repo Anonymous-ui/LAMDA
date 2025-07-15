@@ -1,13 +1,3 @@
-
-This is the source code for paper:<br> 
-[NAR-Former V2: Rethinking Transformer for Universal Neural Network Representation Learning](https://arxiv.org/abs/2306.10792)
-
-## The link to the released files
-[NAR-Former V2](https://drive.google.com/drive/folders/1JtErGuWwPoR9lobxmT_u2BHI57hSAnLV?usp=sharing)
-
-## Experiments of latency prediction on NNLQP
-Here is the guide to train and test our NAR-Former V2 model for latency prediction on the NNLQP dataset.
-
 ### Data preparation
 Download the `unseen_structure` part of [NNLQP](https://github.com/ModelTC/NNLQP) and put it in `dataset/`. Download the `dataset/unseen_structure/gt_stage.txt` and put it in `dataset/unseen_structure/`.
 
