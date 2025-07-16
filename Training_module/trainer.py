@@ -121,7 +121,7 @@ class Trainer():
     print('Test Accuracy:',accuracy.item()/index)
     
 if __name__ == '__main__':
-    config_path = 'D:\\NAR\\NAR-Former-V2-main\\Training_module\\config\\default.yaml'
+    config_path = './config/default.yaml'
     Trainer = Trainer(config_path=config_path)
     Trainer.train()
     
