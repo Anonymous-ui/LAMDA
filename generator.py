@@ -4,7 +4,7 @@ from transformers import AutoTokenizer
 from peft import AutoPeftModelForCausalLM
 
 
-model_dir = 'Qwen-main/14Bsq3-2000'
+model_dir = ''
 tokenizer = AutoTokenizer.from_pretrained(model_dir, trust_remote_code=True)
 model = AutoPeftModelForCausalLM.from_pretrained(
     model_dir,
@@ -16,14 +16,12 @@ model = AutoPeftModelForCausalLM.from_pretrained(
 responses = {}
 
 
-latency_values = [0.5648, 0.5564, 0.7851, 1.0812, 1.0751, 1.0614, 1.0543, 1.0451, 1.4663, 1.6753, 2.7849, 2.8821, 3.8741]
-model_names = ["squeezenet"]
-
+latency_values = []
+model_names = [""]
 
 num_parts = 5  
 
-
-output_dir = 'data8'
+output_dir = ''
 os.makedirs(output_dir, exist_ok=True)
 
 
