@@ -67,7 +67,7 @@ bash test.sh
 
 ## Accuracy Testing Module
 ```bash
-python python ./Training_module/trainer.py
+python ./Training_module/trainer.py
 ```
 
 
